@@ -21,7 +21,7 @@ from machine import Pin, I2C
 from mlx90640 import MLX90640
 from mlx90640.calibration import NUM_ROWS, NUM_COLS, IMAGE_SIZE, TEMP_K
 from mlx90640.image import ChessPattern, InterleavedPattern
-
+import gc
 
 class MLX_Cam:
     """!
@@ -203,35 +203,46 @@ if __name__ == "__main__":
     scanhex = [f"0x{addr:X}" for addr in i2c_bus.scan()]
     print(f"I2C Scan: {scanhex}")
 
+    gc.collect()
     # Create the camera object and set it up in default mode
     camera = MLX_Cam(i2c_bus)
+    gc.collect()
     
     ## Connor's Added Section
     
-    top_left = 0
-    tl = ''
-    top_mid = 0
-    tm = ''
-    top_right = 0
-    tr = ''
-    mid_left = 0
-    ml =  ''
-    mid = 0
-    m = ''
-    mid_right = 0
-    mr = ''
-    bottom_left = 0
-    bl = ''
-    bottom_right = 0
-    br = ''
-    bottom_mid = 0
-    bm = ''
-    
-    row = 0
-    column = 0
-    #x=''
+
     while True:
         try:
+            top_left = 0
+            tl = ''
+            tl_count = 0
+            top_mid = 0
+            tm = ''
+            tm_count = 0
+            top_right = 0
+            tr = ''
+            tr_count = 0
+            mid_left = 0
+            ml =  ''
+            ml_count = 0
+            mid = 0
+            m = ''
+            m_count = 0
+            mid_right = 0
+            mr = ''
+            mr_count = 0
+            bottom_left = 0
+            bl = ''
+            bl_count = 0
+            bottom_right = 0
+            br = ''
+            br_count = 0
+            bottom_mid = 0
+            bm = ''
+            bm_count = 0
+            
+            row = 0
+            column = 0
             # Get and image and see how long it takes to grab that image
             print("Click.", end='')
             begintime = time.ticks_ms()
@@ -248,32 +259,32 @@ if __name__ == "__main__":
                 camera.ascii_image(image.buf)
             elif show_csv:
                 for line in camera.get_csv(image.v_ir, limits=(0, 99)):
-                    print(line)
                     for i in line:
-                        
                         if column < 12:
-                            
                             if row < 8:
                                 if i != ',':
                                     tl += i
-                                    print(tl)
                                 else:
                                     top_left += int(tl)
                                     tl = ''
+                                    column += 1
+                                    tl_count += 1
                             elif row >=8 and row <16:
                                 if i != ',':
                                     tm += i
                                 else:
                                     top_mid += int(tm)
                                     tm = ''
+                                    column += 1
+                                    tm_count +=1
                             else:
                                 if i != ',':
                                     tr += i
                                 else:
-                                    top_right = int(tr)
-                                    tr = ''   
-                            
-                            #print('here')
+                                    top_right += int(tr)
+                                    tr = ''
+                                    column += 1
+                                    tr_count +=1
                         elif column >= 12 and column < 20:
                             if row < 8:
                                 if i != ',':
@@ -281,71 +292,124 @@ if __name__ == "__main__":
                                 else:
                                     mid_left += int(ml)
                                     ml = ''
+                                    column += 1
+                                    ml_count +=1
                             elif row >=8 and row <16:
                                 if i != ',':
                                     m += i
                                 else:
                                     mid += int(m)
                                     m = ''
+                                    column += 1
+                                    m_count +=1
                             else:
                                 if i != ',':
                                     mr += i
                                 else:
-                                    mid_right = int(mr)
+                                    mid_right += int(mr)
                                     mr = ''
+                                    column += 1
+                                    mr_count += 1
                         
                         else:
                             if row < 8:
                                 if i != ',':
                                     bl += i
                                 else:
-                                    bottom_left = int(bl)
+                                    #print(bl)
+                                    bottom_left += int(bl)
                                     bl = ''
+                                    column += 1
+                                    bl_count +=1
                             elif row >=8 and row <16:
                                 if i != ',':
                                     bm += i
                                 else:
-                                    bottom_mid = int(bm)
+                                    bottom_mid += int(bm)
                                     bm = ''
+                                    column += 1
+                                    bm_count +=1
                             else:
                                 if i != ',':
                                     br += i
                                 else:
-                                    bottom_right = int(br)
+                                    bottom_right += int(br)
                                     br = ''
-                        column += 1
-                                
-                                
-                    
-                        #print(column)
-                        #print(top_mid)
-                        #print(top_left)
-                        #print(top_right)
-                        #column += 1
+                                    column += 1
+                                    br_count +=1
                     column = 0
-                    print(line)
-                    
-                    #line.split(',')
-                   # for i in line:
-                    #    %print(i)
-                    #alist.append(line)##
-                    #print(len(line))
-                    #print(line)
                     row += 1
+                    
             else:
                 camera.ascii_art(image.v_ir)
             
-            #print(alist)##
-            top_left = []
-            top_mid = []
-            top_right = []
-            mid_left = []
-            mid = []
-            mid_right = []
-            bottom_left = []
-            bottom_right = []
-            bottom_mid = []  ##
-            time.sleep_ms(10000)
+            top_left_avg = top_left / tl_count
+            top_mid_avg = top_mid / tm_count
+            top_right_avg = top_right / tr_count
+            mid_left_avg = mid_left / ml_count
+            mid_avg = mid / m_count
+            mid_right_avg = mid_right / mr_count
+            bot_left_avg = bottom_left / bl_count
+            bot_mid_avg = bottom_mid / bm_count
+            bot_right_avg = bottom_right / br_count
+            
+            matrix_list = [top_left_avg, top_mid_avg, top_right_avg, mid_left_avg, mid_avg, mid_right_avg, bot_left_avg, bot_mid_avg, bot_right_avg]
+            max_val_avg = max(matrix_list)
+            max_index = matrix_list.index(max_val_avg)
+            print(max_index)
+            if max_index == 0:
+                pass
+            elif max_index == 1:
+                pass
+            elif max_index == 2:
+                pass
+            elif max_index == 3:
+                pass
+            elif max_index == 4:
+                pass
+            elif max_index == 5:
+                pass
+            elif max_index == 6:
+                pass
+            elif max_index == 7:
+                pass
+            else:
+                pass
+            
+            
+            
+            
+            top_left = 0
+            top_mid = 0
+            top_right = 0
+            mid_left = 0
+            mid = 0
+            mid_right = 0
+            bottom_left = 0
+            bottom_mid = 0
+            bottom_right = 0
+            
+            tl_count = 0
+            tm_count = 0
+            tr_count = 0
+            ml_count = 0
+            m_count = 0
+            mr_count = 0
+            bl_count = 0
+            bm_count = 0
+            br_count = 0
+            
+            
+            #top_left =
+            #top_mid = 
+            #top_right = 
+            #mid_left = 
+            #mid = 
+            #mid_right = 
+            #bottom_left = 
+            #bottom_right = 
+            #bottom_mid =   
+            time.sleep_ms(5000)
 
 
         except KeyboardInterrupt:
