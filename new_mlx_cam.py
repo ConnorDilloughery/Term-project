@@ -234,18 +234,18 @@ if __name__ == "__main__":
             print(row, column)
             
             
-#             show_image = False
-#             show_csv = True
-#             if show_image:
-#                 camera.ascii_image(image.buf)
-#             elif show_csv:
-#                 #print(image.v_ir)
-#                 #print (camera.get_csv(image.v_ir, limits=(0, 99)))
-#                 for line in camera.get_csv(image.v_ir, limits=(0, 99)):
-#                     print(line)
-#             else:
-#                 camera.ascii_art(image.v_ir)
-#             #print(array)
+            show_image = False
+            show_csv = True
+            if show_image:
+                camera.ascii_image(image.buf)
+            elif show_csv:
+                #print(image.v_ir)
+                #print (camera.get_csv(image.v_ir, limits=(0, 99)))
+                for line in camera.get_csv(image.v_ir, limits=(0, 99)):
+                    print(line)
+            else:
+                camera.ascii_image(image.v_ir)
+            #print(array)
             time.sleep_ms(5000)
 
         except KeyboardInterrupt:

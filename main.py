@@ -93,7 +93,7 @@ def main():
                 except KeyboardInterrupt:
                     break
                 max_val = 0
-                print(pixel_array)
+                #print(pixel_array)
                 
                 print(len(pixel_array))
                 for i in range(1,len(pixel_array)):
