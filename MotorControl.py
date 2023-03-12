@@ -4,10 +4,10 @@ class PropControl:
     '''! This class is meant to control a permanent DC motor through the use
          of PWM. The class has the ability to reset home, change desired motor
          position, and calcualting the error to produce a new PWM value.
-         
     '''
     def __init__(self, Kp,Theta_Want):
-        '''! This is initiliazing the object
+        '''!
+        This is initiliazing the object
         @param self placeholder for the motorcontrol
         @param Kp The Kp parameter specifies the proportional constant
         @Param Theta_Want This Variable indicates the desired motor location
@@ -31,7 +31,6 @@ class PropControl:
             @param Theta_Count The current position of the motor
             @param Theta_Want The position of the motor that is wanted
             @return PWM The new PWM value to be used to run the motor
-
         '''
         self.Theta_Want= Theta_Want
         self.Theta_Count= Theta_Count

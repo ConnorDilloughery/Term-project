@@ -6,15 +6,15 @@ from mlx90640.utils import (
 )
 from mlx90640.regmap import REG_SIZE
 
-NUM_ROWS = 24
-NUM_COLS = 32
-IMAGE_SIZE = 24*32
+NUM_ROWS = const(24)
+NUM_COLS = const(32)
+IMAGE_SIZE = const(24*32)
 
-OCC_ROWS_ADDRESS = 0x2412
-OCC_COLS_ADDRESS = 0x2418
+OCC_ROWS_ADDRESS = const(0x2412)
+OCC_COLS_ADDRESS = const(0x2418)
 
-ACC_ROWS_ADDRESS = 0x2422
-ACC_COLS_ADDRESS = 0x2428
+ACC_ROWS_ADDRESS = const(0x2422)
+ACC_COLS_ADDRESS = const(0x2428)
 
 CC_PROTO = StructProto((
     field_desc('0', 4,  0, signed=True),
@@ -51,7 +51,7 @@ PIX_CALIB_PROTO = StructProto((
     field_desc('outlier', 1,  0),
 ))
 
-PIX_CALIB_ADDRESS = 0x2440
+PIX_CALIB_ADDRESS = const(0x2440)
 
 
 class PixelCalibrationData:
@@ -161,8 +161,8 @@ class CameraCalibration:
         self.ksto = (ksto1, ksto2, ksto3, ksto4)
 
         step = eeprom['step'] * 10
-        ct1 = -40
-        ct2 = 0
+        ct1 = const(-40)
+        ct2 = const(0)
         ct3 = eeprom['ct3'] * step
         ct4 = eeprom['ct4'] * step + ct3
         self.ct = (ct1, ct2, ct3, ct4)
