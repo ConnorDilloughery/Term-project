@@ -334,13 +334,14 @@ def task1_Motor(shares):#Kp1, theta1):
         #Setting the motor to 0. Off
         Motor1.set_duty_cycle(0)
         Theta_Count_Old = -1 # want nonzero value to prevent delta_theta from being 0 at the start
+        counter = 0
         while True:
             while theta_want1.any():
                 
                 #Reading the current position of the motor
                 Theta_Count = Motor1E.read()
                 #delta_Theta2 = Theta_Count2 - Theta_Count_Old2
-                if abs(Theta_Count - Theta_Count_Old) > 1000 :
+                if abs(Theta_Count - Theta_Count_Old) > 1000 or counter < 1000 :
                     #Calculating the new PWM value depending on the current position of the motor
                     PWM = Motor1PC.run(Theta_Count, Theta_Want)
                     Motor1.set_duty_cycle(PWM)
@@ -351,6 +352,7 @@ def task1_Motor(shares):#Kp1, theta1):
                     Motor1.set_duty_cycle(PWM)
                     break
                     #yield 0
+                counter += 1
             while True:
                 
                 #print('1')
