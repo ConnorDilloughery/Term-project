@@ -350,8 +350,8 @@ def task1_Motor(shares):#Kp1, theta1):
                 else:
                     PWM = 0
                     Motor1.set_duty_cycle(PWM)
-                    break
-                    #yield 0
+                    #break
+                    yield 0
                 counter += 1
             while True:
                 
