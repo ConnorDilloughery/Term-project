@@ -86,7 +86,7 @@ When the thermal camera produced temperature readings, we cycled through the arr
 
 To make our motors functional, we inputted a desired encoder positon value. We also assigned a proportional constant on the motor to tell our motor how fast to run. We used our code from Lab 2 to drive our motor. 
     
- The link to find these functions are: ____________________________________________
+ The link to find these functions are: [Code Overview](https://connordilloughery.github.io/Term_Project_Website/main_8py.html)
  
  Although the mechanical design did not work in the end, we were able to get the positional motors, thermal camera, gun, and solenoid working. As apart 
  of our demonstration, we should off the fully automatic setting of our gun. 
