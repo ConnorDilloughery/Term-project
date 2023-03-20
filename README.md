@@ -58,6 +58,9 @@ In make our software, we imported the following code:
   - regmap.py
   - utilts.py
   - __init__.py
+
+To make our code, we used finite state machines to tell the code which state to run. See the attached image below to see the finite state diagram:
+![image](Term_Project.jpeg)
  
  In our main file, we used four different functions:
   - main(): This function includes all of the finite states and calls neccessary functions to run our hardware. 
@@ -67,6 +70,7 @@ In make our software, we imported the following code:
   - fire(): The fire function gets called when it's time to turn on the gun motors and activate the solenoid. It cycles through, turning the solenoid 
     off and on. 
     
+
  To make our thermal camera funcitonal for our code, we created a 3x3 matrix with the following purpose:
   - Top Left
   - Top Middle
