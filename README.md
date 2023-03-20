@@ -26,10 +26,26 @@ Once the Metek motors aligned the turret with the target, the hardware associate
 ### Full Design 
 ![image](https://user-images.githubusercontent.com/122577773/226222147-2c329de2-7c2a-43a1-b06c-6d770caa4d86.png)
 ![image](https://user-images.githubusercontent.com/122577773/226222177-a3a2ce05-a930-434d-a38e-5b1ee39daafd.png)
+This shows the overall design of the turret. A lot of the parts were opted to be made out of wood to prevent using 3d printing for everything. The only things that were 3d printed were the gears for the drive system, magazine holder, and motor holders. While the entrety of the design could have been 3D printed, in an effort to spend more time in the shop/using tools, the decision was made to make almost every piece wood. Pictured Below as some images of the whole design after it was built. There are some components missing such as the camera and motors as they were taken off but clear locations for motor are present. The camera was placed on the shaft, using a piece similar to the motor holders. 
+
+### Flywheel and Solenoid Mechanism
+The actuation as previously described utiizes a solenoid pushing a dart into the flywheel. While there is nothing complex about the stup, the design approach was chosen for successful fire and space saving configuration. Pictured below is the setup. 
+![image](https://user-images.githubusercontent.com/122577773/226224302-dfea7306-ccb7-44fc-967d-1e093e078ce5.png)
 
 
 ### Gear System Overview
+The most intricate pieces of this design were the two gearboxes that were used to drive the system. An initial design led to the whole device having a large gear reduction due to the possible weight that it would have. Upon further testing, it was not required but proved to be helpful in controlling the yaw and pitch to pin point locations. With a limited refresh rate fromm an unoptimized camera code for higher refresh rates, the slower turning allowed for greater control in our direction as needed. 
 #### Yaw Drive System 
+The first drive system that was created was the yaw drive system. This was the most critical as the base would need a 270 degree range at the most. An input gear attached to the motor is the driving gear. Each driven/driver gear is a couple between a large and small gear to allow for rigid attachment but free spin on teh shaft it is located on. The only shaft that is glued to the gears is the last shaft that connects the bottom gear system to the top system which rotates a central gear attached to the base. Pictured below are models of the design and the real world build of such a system.
+![image](https://user-images.githubusercontent.com/122577773/226223103-f9b8210e-8913-4b44-94d6-b3a6368f1010.png)
+![image](https://user-images.githubusercontent.com/122577773/226223153-54c3610a-7d69-4ed0-b1d3-7acd8ad44445.png)
+![image](https://user-images.githubusercontent.com/122577773/226223186-d3170483-53c2-4aab-b7be-d50c03a3ed41.png)
+
+#### Pitch Drive System 
+Similar to the drive system located beneath the entire device, the pitch system has the same gear ratio althought a different arrangement. Upon actual creation of the device, the gear reatio was decreased by removing 2 gears, resulting in a 4:1 ratio. Below are pictures of the concept design as opposed to the gear ratio actaully implemented for the yaw system.
+![image](https://user-images.githubusercontent.com/122577773/226223922-9f26c178-e1cf-418e-a4b6-d1f24dd1390d.png)
+![image](https://user-images.githubusercontent.com/122577773/226223953-990da25f-60e1-4f4a-ab13-2a9d688169d4.png)
+
 
 ## Software Overview
 In make our software, we imported the following code: 
