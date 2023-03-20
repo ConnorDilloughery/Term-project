@@ -60,7 +60,7 @@ In make our software, we imported the following code:
   - __init__.py
 
 To make our code, we used finite state machines to tell the code which state to run. See the attached image below to see the finite state diagram:
-![image](Term_Project.jpeg)
+![image](Term_Project_FSM.jpeg)
  
  In our main file, we used four different functions:
   - main(): This function includes all of the finite states and calls neccessary functions to run our hardware. 
