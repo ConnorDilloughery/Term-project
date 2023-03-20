@@ -90,3 +90,22 @@ To make our motors functional, we inputted a desired encoder positon value. We a
  To test our model, we first tested the thermal camera. We had one member hold up the thermal camera while the other stood ~10 feet away. We oriented 
  the camera to see it the member was being read by the camera. 
  
+## Results
+The system was tested as it was built. Some devices/actions were not tested until the very end but each system was tested individually to see how it was working. Being that the entire device was built of wood and tolerances caused by our cuts/holes, there was a lot more that could go wrong. Within testing, a lot of this was apparent but we made do with what we had to fix the design on. Below are the different tests performed in no particular order. 
+
+### Testing Firing Mechanism
+The very first mechanism that was tested was the firing mechanism. The reasoning that this was the first device to be tested was that it was the simplest to get up and runnng after being buillt. It did not rely on any other device. There were some issues at first when getting the device running such as not having the correct mosfet and not sharing an equal ground. After figuring that all out, a simple code was put into the terminal to turn on each device in the order that they should. Firing rate was adjusted to see the time of travel requied to have successful actuation and deliver the dart into the flywheels. 
+
+### Testing Camera Detection
+The camera was a bit harder to test inititally when there was alignment issues with the base. The initial approach to test the device was to have the camera in a place and record the approximate angle that we were away from the center of the camera. With the code running, the camera would detect that we were nearby, sending a new theta value to be achieved by the motors. The theta value was taken from the print statement and then we determined if it was approximately the location that one us were standing at relative to the center of the camera. We knew the amount of ticks per full revolution which allowed a ballpark estimate of the theta value that should be given to get to the location. The testing with this method went well. The camera was allowed to run serveral times, repritning the theta value that was recently calculated. Each time, the theta value was close nough that we considered the camera a success for the time being.
+
+
+### Testing Pitch Drive System
+
+### Testing Yaw Drive System 
+
+
+
+
+
+### Testing System
